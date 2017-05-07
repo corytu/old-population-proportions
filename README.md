@@ -83,6 +83,8 @@ g <- g + theme(axis.title = element_blank(),
 g
 ```
 
+![Percentages in a continous scale](Percentages_continuous.png)
+
 __The redder the district, the more aged people there (in percentage).__ The continuous scale provides information of different districts in fine resolution. Data of three time points (Dec 2015, Jun 2016, and Dec 2016) are shown. However the increase of aged people in Taiwan may not be obvious enough, so I plot another figure by categories of seriousness (not aging, aging, aged, and super-aged).
 
 ```r
@@ -114,6 +116,8 @@ h <- h + theme(axis.title = element_blank(),
                plot.title = element_text(hjust = 0.5))
 h
 ```
+
+![Percentages in a categorical scale](Percentages_categorical.png)
 
 __Again, the redder the district, the higher proportions of aged people there.__ Kaohsiung City has districts which are quite young (but in fact also few people), but some really old ones too.
 
