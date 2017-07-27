@@ -125,4 +125,4 @@ __Again, the redder the district, the higher proportions of aged people there.__
 We can find that from 2015 to 2016, the status of multiple districts have shifted from aging to aged or even super-aged. The problems of aging society are very likely to become more explicit in Taiwan in the near future. We should be prepared when that comes.
 
 This README is updated on May 7, 2017.<br>
-[html version](https://corytu.github.io/R-Language-Exhibition/Pages%20%26%20Docs/Old_Population_Proportions.html)
+[html version](https://corytu.github.io/R-Language-Exhibition/Docs/Old_Population_Proportions.html)
