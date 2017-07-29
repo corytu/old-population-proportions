@@ -5,12 +5,19 @@ library(mapproj)
 library(magrittr)
 library(reshape2)
 # shinyapps.io supports only UTF-8 encoding for Chinese characters!!!!
+# Read borders from the .shp file
 mymap <- readShapePoly("data/mapdata201701120616/DistrictBorder1051214/TOWN_MOI_1051214.shp")
-CountyTown <- paste(iconv(mymap$COUNTYNAME, from = "UTF-8"),
-                    iconv(mymap$TOWNNAME, from = "UTF-8"), sep = "")
+# Paste county names and town names together without space
+# iconv is used to convert encoding
+CountyTown <- paste0(iconv(mymap$COUNTYNAME, from = "UTF-8"),
+                    iconv(mymap$TOWNNAME, from = "UTF-8"))
+# Fortify mymap as a data frame
 mymap2 <- fortify(mymap) %>%
   transform(id = factor(id, labels = CountyTown))
+# Read older adults proportion data
 raw_data <- read.csv("data/OldRate.csv")
+# Add countytown names to the older adults proportion data frame
+# because the original chinese characters seem unacceptable in shiny app
 source("data/HOPE.R", encoding = "UTF-8")
 raw_data$CountyTown <- hope
 merged_data <- merge(data.frame(CountyTown = CountyTown), raw_data)
