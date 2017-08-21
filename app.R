@@ -3,7 +3,6 @@ library(magrittr)
 library(maptools)
 library(leaflet)
 library(rgeos)
-library(htmltools)
 
 # Create UI
 ui <- fluidPage(
