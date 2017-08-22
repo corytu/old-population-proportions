@@ -111,7 +111,6 @@ server <- function(input, output) {
                   labFormat = labelFormat(suffix = "%"))
     }
     else {
-      
       # Define palettes
       pal <- colorFactor(c("#2c7bb6", "#abd9e9", "#fdae61", "#d7191c"),
                          merge_map()$Values)
