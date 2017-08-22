@@ -2,7 +2,10 @@
 Shiny app showing proportions of older adults across districts in Taiwan.
 
 ## v2.0 全新改版
-本次地圖捨棄`ggplot2`的靜態表現，改用`leaflet`呈現互動式地圖。因此，主要差別為上次使用`ggplot2::fortify`將sp物件（SpatialPolygonsDataFrame）轉為data frame，再`base::merge`鄉鎮市邊界與老化資料；而本次則直接使用`sp::merge`將老化資料的data frame融合進sp物件。語法主要參考[Leaflet for R - Choropleths](https://rstudio.github.io/leaflet/choropleths.html)（其示範complete code複製於最下方），併以shiny套件呈現。
+- 本次地圖捨棄`ggplot2`的靜態表現，改用`leaflet`呈現互動式地圖。
+- 使用者不再需要選定縣市別而可綜觀全臺灣資料。
+- 上次使用`ggplot2::fortify`將sp物件（SpatialPolygonsDataFrame）轉為data frame，再`base::merge`鄉鎮市邊界與老化資料；而本次則直接使用`sp::merge`將老化資料的data frame融合進sp物件。
+- 語法主要參考[Leaflet for R - Choropleths](https://rstudio.github.io/leaflet/choropleths.html)（其示範complete code複製於最下方），併以shiny套件呈現。
 
 ## 啟動方式
 執行本程式的方法有二：
