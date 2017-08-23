@@ -23,6 +23,12 @@ Shiny app showing proportions of older adults across districts in Taiwan.
 ## 待完成
 - 於shiny介面中加上進度條或對話視窗，告知使用者運算仍在進行中。
 
+## 政府開放資料授權顯名聲明
+- 內政部國土測繪中心 [2017] [[鄉鎮市區界線（TWD97經緯度）]](https://data.gov.tw/dataset/7441)
+- 內政部戶政司 [2017] [[各村（里）戶籍人口統計月報表]](https://data.gov.tw/dataset/8411)
+- 此開放資料依政府資料開放授權條款（Open Government Data License）進行公眾釋出，使用者於遵守本條款各項規定之前提下，得利用之。
+- 政府資料開放授權條款：https://data.gov.tw/license
+
 ## Leaflet官網示範美國各州人口密度圖
 ```r
 # From http://leafletjs.com/examples/choropleth/us-states.js
