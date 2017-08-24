@@ -21,7 +21,7 @@ Shiny app showing proportions of older adults across districts in Taiwan.
     ```
 
 ## 待完成
-- 於shiny介面中加上進度條或對話視窗，告知使用者運算仍在進行中。
+- 於shiny介面中加上進度條或對話視窗，告知使用者運算仍在進行中。（在PTT上[問過之後](https://www.ptt.cc/bbs/R_Language/M.1503326582.A.2EC.html)，發現並非單純為程式碼中產生地圖的過程編寫進度即可，物件呈現花的時間也不少，但最後這一步無法被寫進`shiny::withProgress`內。）
 
 ## 政府開放資料授權顯名聲明
 - 內政部國土測繪中心 [2017] [[鄉鎮市區界線（TWD97經緯度）]](https://data.gov.tw/dataset/7441)
