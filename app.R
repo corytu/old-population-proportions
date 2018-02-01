@@ -4,39 +4,16 @@ library(maptools)
 library(leaflet)
 library(rgeos)
 
-# Create UI
-ui <- fluidPage(
-  titlePanel("臺灣各鄉鎮市區老化情形"), 
-  sidebarLayout(
-    sidebarPanel(
-      selectInput("selecttime", "請選擇時間點：",
-                  # !!! Add one time point selection on each update
-                  c("106年6月", "105年12月", "105年6月","104年12月")),
-      radioButtons("datatype", "請選擇欲觀看資料型別：",
-                   c("老年人口百分比", "高齡類型")),
-      helpText(HTML("區域邊界資料來源：<a href=\"http://data.gov.tw/dataset/7441\">內政部國土測繪中心 [2017] 鄉鎮市區界線（TWD97經緯度）</a>")),
-      helpText(HTML("老化人口資料來源：<a href=\"https://data.gov.tw/dataset/8411\">內政部戶政司 [2017] 各村（里）戶籍人口統計月報表</a>")),
-      helpText(HTML("此開放資料依<a href=\"https://data.gov.tw/license\">政府資料開放授權條款（Open Government Data License）</a>進行公眾釋出，使用者於遵守本條款各項規定之前提下，得利用之。")),
-      helpText("老化數據資料整理：張永泓"),
-      helpText("系統建置暨維護：涂玉臻"),
-      helpText("最後更新：106年8月")
-    ),
-    mainPanel(
-      leafletOutput("mapplot", height = 700),
-      br(),
-      dataTableOutput("districtdata")
-    )
-  )
-)
-
 # Read the borders from .shp file
 mymap <- readShapePoly("data/mapdata201701120616/DistrictBorder1051214/TOWN_MOI_1051214.shp")
 # Read older adults proportion data
 raw_data <- read.csv("data/OldRate.csv", fileEncoding = "UTF-8")
 
 # Data preprocessing
-# !!! Add one time point on each update!!!
-timepoints <- c("Y104M12", "Y105M06", "Y105M12", "Y106M06")
+timepoints <- c("Y104M12",
+                sprintf("Y%dM%02d",
+                        rep(105:115, each = 2, length.out = ncol(raw_data)-2),
+                        rep(c(6,12), each = 1, length.out = ncol(raw_data)-2)))
 names(raw_data) <- c("CountyTown", timepoints)
 status <-
   lapply(raw_data[-1],
@@ -59,14 +36,45 @@ CountyTown <- paste0(iconv(mymap$COUNTYNAME, from = "UTF-8"),
                      iconv(mymap$TOWNNAME, from = "UTF-8"))
 joint <- data.frame(CountyTown, TOWNCODE = mymap$TOWNCODE)
 
+# Create UI
+ui <- fluidPage(
+  titlePanel("臺灣各鄉鎮市區老化情形"), 
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("selecttime", "請選擇時間點：",
+                  rev(
+                    c("104年12月",
+                      sprintf("%d年%d月",
+                              rep(105:115, each = 2, length.out = ncol(raw_data)-2),
+                              rep(c(6,12), each = 1, length.out = ncol(raw_data)-2)))
+                  )),
+      radioButtons("datatype", "請選擇欲觀看資料型別：",
+                   c("老年人口百分比", "高齡類型")),
+      helpText(HTML("區域邊界資料來源：<a href=\"http://data.gov.tw/dataset/7441\">內政部國土測繪中心 [2017] 鄉鎮市區界線（TWD97經緯度）</a>")),
+      helpText(HTML("老化人口資料來源：<a href=\"https://data.gov.tw/dataset/8411\">內政部戶政司 [2017] 各村（里）戶籍人口統計月報表</a>")),
+      helpText(HTML("此開放資料依<a href=\"https://data.gov.tw/license\">政府資料開放授權條款（Open Government Data License）</a>進行公眾釋出，使用者於遵守本條款各項規定之前提下，得利用之。")),
+      helpText("老化數據資料整理：張永泓"),
+      helpText("系統建置暨維護：涂玉臻"),
+      helpText("最後更新：107年2月")
+    ),
+    mainPanel(
+      leafletOutput("mapplot", height = 700),
+      br(),
+      dataTableOutput("districtdata")
+    )
+  )
+)
+
 # Create server
 server <- function(input, output) {
   # Subset the interested data
   match_data <- reactive({
     match_time <- timepoints[
       match(input$selecttime,
-            # !!! Update a time point on each update!!!
-            rev(c("106年6月", "105年12月", "105年6月","104年12月")))
+            c("104年12月",
+              sprintf("%d年%d月",
+                      rep(105:115, each = 2, length.out = ncol(raw_data)-2),
+                      rep(c(6,12), each = 1, length.out = ncol(raw_data)-2))))
       ]
     if (input$datatype == "高齡類型") {
       match_time <- paste(match_time, "status", sep = "_")
