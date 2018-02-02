@@ -10,7 +10,7 @@ Shiny app showing proportions of older adults across districts in Taiwan.
 ## 啟動方式
 執行本程式的方法有二：
 
-1. 直接點擊[臺灣各鄉鎮市區老化情形](https://corytu.shinyapps.io/old_populations_dist/)。此為[shinyapps.io](http://www.shinyapps.io)提供之免費方案，然因此版本所需運算量較大，執行速度不甚理想。
+1. 直接點擊[臺灣各鄉鎮市區老化情形](https://corytu.shinyapps.io/old-population-proportions/)。此為[shinyapps.io](http://www.shinyapps.io)提供之免費方案，然因此版本所需運算量較大，執行速度不甚理想。
 2. 有安裝R軟體者，可直接在本地端執行（通常速度較快）：
 
     ```r
