@@ -6,6 +6,7 @@ Shiny app showing proportions of older adults across districts in Taiwan.
 - 使用者不再需要選定縣市別而可綜觀全臺灣資料。
 - 上次使用`ggplot2::fortify`將sp物件（SpatialPolygonsDataFrame）轉為data frame，再`base::merge`鄉鎮市區邊界與老化資料；而本次則直接使用`sp::merge`將老化資料的data frame融合進sp物件。
 - 語法主要參考[Leaflet for R - Choropleths](https://rstudio.github.io/leaflet/choropleths.html)（其示範complete code複製於最下方），併以`shiny`套件呈現。
+- 在PTT上[問過之後](https://www.ptt.cc/bbs/R_Language/M.1503326582.A.2EC.html)，發現並非單純為程式碼中產生地圖的過程編寫進度即可，物件呈現花的時間也不少，但最後這一步無法被寫進`shiny::withProgress`內。
 
 ## 啟動方式
 執行本程式的方法有二：
@@ -17,11 +18,8 @@ Shiny app showing proportions of older adults across districts in Taiwan.
     # 第一次使用需安裝套件
     install.packages(c("shiny", "magrittr", "maptools", "leaflet", "rgeos"))
     # 套件安裝完成後
-    shiny::runGitHub("Old-Population-Proportions", "corytu")
+    shiny::runGitHub("OldPopulationProportions", "corytu")
     ```
-
-## 待完成
-- 於shiny介面中加上進度條或對話視窗，告知使用者運算仍在進行中。（在PTT上[問過之後](https://www.ptt.cc/bbs/R_Language/M.1503326582.A.2EC.html)，發現並非單純為程式碼中產生地圖的過程編寫進度即可，物件呈現花的時間也不少，但最後這一步無法被寫進`shiny::withProgress`內。）
 
 ## 政府開放資料授權顯名聲明
 - 內政部國土測繪中心 [2017] [[鄉鎮市區界線（TWD97經緯度）]](https://data.gov.tw/dataset/7441)
