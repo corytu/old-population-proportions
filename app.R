@@ -55,7 +55,8 @@ ui <- fluidPage(
       helpText(HTML("此開放資料依<a href=\"https://data.gov.tw/license\">政府資料開放授權條款（Open Government Data License）</a>進行公眾釋出，使用者於遵守本條款各項規定之前提下，得利用之。")),
       helpText("老化數據資料整理：張永泓"),
       helpText("系統建置暨維護：涂玉臻"),
-      helpText("最後更新：107年2月")
+      helpText("最後更新：107年2月"),
+      helpText(HTML("在<a href=\"https://github.com/corytu/OldPopulationProportions\">GitHub</a>上查看原始碼"))
     ),
     mainPanel(
       leafletOutput("mapplot", height = 700),
