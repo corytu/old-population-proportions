@@ -5,7 +5,7 @@ library(leaflet)
 library(rgeos)
 
 # Read the borders from .shp file
-mymap <- readShapePoly("data/mapdata201701120616/DistrictBorder1051214/TOWN_MOI_1051214.shp")
+mymap <- readShapePoly("data/mapdata201701120616/TOWN_MOI_1051214.shp")
 # Read older adults proportion data
 raw_data <- read.csv("data/OldRate.csv", fileEncoding = "UTF-8")
 
