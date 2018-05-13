@@ -48,8 +48,7 @@ ui <- fluidPage(
 
 # Create server
 server <- function(input, output) {
-  # Do things only after the actionButton is clicked
-  
+  # Change the map and data only after the submitButton is clicked
   # Subset the interested data
   match_data <- reactive({
     match_time <- timepoints_en[match(input$selecttime, timepoints_ch)]
