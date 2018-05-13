@@ -39,7 +39,7 @@
     ```
 
 7. 在剛剛歡迎畫面的網址後面再加上Shiny資料夾的名稱，即`http://<the external IP>:3838/<name of the app folder>/`，完成！
-8. 進階的部分還有許多細節可以調整，例如指定用哪一個帳號去執行部署出去的Shiny apps。Shiny Server Administrator's Guide有很詳盡的說明。
+8. 進階的部分還有許多細節可以調整，例如指定用哪一個帳號去執行部署出去的Shiny apps，或者啟動及沒有新連線之後逾時（timeout）的秒數，都可以在前述的`/etc/shiny-server/shiny-server.conf`裡設定。Shiny Server Administrator's Guide有很詳盡的說明。
 
 參考資料：
 
