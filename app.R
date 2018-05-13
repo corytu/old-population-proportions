@@ -6,30 +6,17 @@ library(rgeos)
 
 # Read the borders from .shp file
 mymap <- readShapePoly("data/mapdata201701120616/TOWN_MOI_1051214.shp")
-# Read older adults proportion data
-raw_data <- read.csv("data/OldRate.csv", fileEncoding = "UTF-8")
+# Read the old population data
+clean_data <- read.csv("data/OldRateStatus.csv", fileEncoding = "UTF-8", stringsAsFactors = FALSE)
+clean_data[, names(clean_data) %>% grep("_status$", .)] %<>%
+  lapply(function(column) {factor(column, levels = c("未達高齡化", "高齡化", "高齡", "超高齡"))})
 
-# Data preprocessing
-timepoints <- c("Y104M12",
-                sprintf("Y%dM%02d",
-                        rep(105:115, each = 2, length.out = ncol(raw_data)-2),
-                        rep(c(6,12), each = 1, length.out = ncol(raw_data)-2)))
-names(raw_data) <- c("CountyTown", timepoints)
-status <-
-  lapply(raw_data[-1],
-         function(column) {
-           output <- rep(NA, length(column))
-           for (i in seq_along(column)) {
-             if (column[i] < 7) {output[i] <- "未達高齡化"}
-             else if (column[i] < 14) {output[i] <- "高齡化"}
-             else if (column[i] < 20) {output[i] <- "高齡"}
-             else {output[i] <- "超高齡"}
-           }
-           return(factor(output,
-                         levels = c("未達高齡化", "高齡化", "高齡", "超高齡")))
-         })
-names(status) <- paste(names(status), "status", sep = "_")
-clean_data <- cbind(raw_data, as.data.frame(status))
+# Prepare vectors of time points
+timepoints_en <- names(clean_data) %>% grep("^Y\\d+M\\d+$", ., value = TRUE)
+timepoints_ch <- c("104年12月",
+                   sprintf("%d年%d月",
+                           rep(105:200, each = 2, length.out = (ncol(clean_data)-2)/2),
+                           rep(c(6,12), each = 1, length.out = (ncol(clean_data)-2)/2)))
 
 # Create a dataframe for later merging
 CountyTown <- paste0(iconv(mymap$COUNTYNAME, from = "UTF-8"),
@@ -38,18 +25,11 @@ joint <- data.frame(CountyTown, TOWNCODE = mymap$TOWNCODE)
 
 # Create UI
 ui <- fluidPage(
-  titlePanel("臺灣各鄉鎮市區老化情形"), 
+  titlePanel("臺灣各鄉鎮市區老化情形"),
   sidebarLayout(
     sidebarPanel(
-      selectInput("selecttime", "請選擇時間點：",
-                  rev(
-                    c("104年12月",
-                      sprintf("%d年%d月",
-                              rep(105:115, each = 2, length.out = ncol(raw_data)-2),
-                              rep(c(6,12), each = 1, length.out = ncol(raw_data)-2)))
-                  )),
-      radioButtons("datatype", "請選擇欲觀看資料型別：",
-                   c("老年人口百分比", "高齡類型")),
+      selectInput("selecttime", "請選擇時間點：", rev(timepoints_ch)),
+      radioButtons("datatype", "請選擇欲觀看資料型別：", c("老年人口百分比", "高齡類型")),
       submitButton("確認"),
       helpText(HTML("區域邊界資料來源：<a href=\"http://data.gov.tw/dataset/7441\">內政部國土測繪中心 [2017] 鄉鎮市區界線（TWD97經緯度）</a>")),
       helpText(HTML("老化人口資料來源：<a href=\"https://data.gov.tw/dataset/8411\">內政部戶政司 [2017] 各村（里）戶籍人口統計月報表</a>")),
@@ -72,13 +52,7 @@ server <- function(input, output) {
   
   # Subset the interested data
   match_data <- reactive({
-    match_time <- timepoints[
-      match(input$selecttime,
-            c("104年12月",
-              sprintf("%d年%d月",
-                      rep(105:115, each = 2, length.out = ncol(raw_data)-2),
-                      rep(c(6,12), each = 1, length.out = ncol(raw_data)-2))))
-      ]
+    match_time <- timepoints_en[match(input$selecttime, timepoints_ch)]
     if (input$datatype == "高齡類型") {
       match_time <- paste(match_time, "status", sep = "_")
     }
