@@ -6,7 +6,12 @@ Shiny app showing proportions of older adults across districts in Taiwan
 - 使用者不再需要選定縣市別而可綜觀全臺灣資料。
 - 上次使用`ggplot2::fortify`將sp物件（SpatialPolygonsDataFrame）轉為data frame，再`base::merge`鄉鎮市區邊界與老化資料；而本次則直接使用`sp::merge`將老化資料的data frame融合進sp物件。
 - 語法主要參考[Leaflet for R - Choropleths](https://rstudio.github.io/leaflet/choropleths.html)，併以`shiny`套件呈現。
-- 雖然互動性提高了一些，但代價是圖形呈現的速度變慢了，目前還沒有找到方法加快、或是讓使用者知道執行進度（[issue #1](https://github.com/corytu/OldPopulationProportions/issues/1)）。
+- 雖然互動性提高了一些，但代價是圖形呈現的速度變慢了，目前還沒有找到方法加快、或是讓使用者知道執行進度。
+    - 如果加上進度條，它會瞬間跑完，但地圖還是要至少十數秒後才會被呈現（[issue #1](https://github.com/corytu/OldPopulationProportions/issues/1)）。
+    - 網路上有一些關於`leaflet`畫大型地圖的表現討論：
+        - [Leaflet R performance issues with large map](https://stackoverflow.com/questions/40063663/leaflet-r-performance-issues-with-large-map)
+        - [Shiny app runs significantly slower on Shiny Servers than it does locally](https://stackoverflow.com/questions/50307616/shiny-app-runs-significantly-slower-on-shiny-servers-than-it-does-locally/)
+        - [Render large spatial datasets in shiny leaflet (ropensci/auunconf#38)](https://github.com/ropensci/auunconf/issues/38)
 
 ## 啟動方式
 執行本程式的方法有三：
