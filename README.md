@@ -17,7 +17,7 @@ Shiny app showing proportions of older adults across districts in Taiwan
 執行本程式的方法有三：
 
 1. 造訪[臺灣各鄉鎮市區老化情形 @ shinyapps.io](https://corytu.shinyapps.io/old-population-proportions/)。此為[shinyapps.io](http://www.shinyapps.io)提供之免費解決方案。
-2. 造訪[臺灣各鄉鎮市區老化情形 @ Google Compute Engine](http://104.199.205.203:3838/OldPopulationProportions/)。此為[Google Cloud Platform](https://cloud.google.com)提供的免費試用額度（該額度用完時我會把這個連結關掉）。順帶一題，我寫了一篇[如何在GCP上部署Shiny Server](setup/howto_deploy_onGCP.md)的步驟教學，以及[部署時會用到的shell script](setup/deploy_shiny_server.sh)，以整理部署過程中遇到的困難及解決方法。
+2. 造訪[臺灣各鄉鎮市區老化情形 @ Google Compute Engine](http://35.234.15.25:3838/OldPopulationProportions/)。此為[Google Cloud Platform](https://cloud.google.com)提供的免費試用額度（該額度用完時我會把這個連結關掉）。順帶一題，我寫了一篇[如何在GCP上部署Shiny Server](setup/howto_deploy_onGCP.md)的步驟教學，以及[部署時會用到的shell script](setup/deploy_shiny_server.sh)，以整理部署過程中遇到的困難及解決方法。
 3. 有安裝R軟體者，可直接在本地端執行：
 
     ```r
