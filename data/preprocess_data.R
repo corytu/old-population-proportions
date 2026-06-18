@@ -1,5 +1,5 @@
 # Read older adults proportion data
-raw_data <- read.csv("OldRate.csv", fileEncoding = "UTF-8")
+raw_data <- read.csv("data/OldRate.csv", fileEncoding = "UTF-8")
 
 # Data preprocessing
 timepoints <- c("Y104M12",
@@ -22,4 +22,4 @@ status <-
 names(status) <- paste(names(status), "status", sep = "_")
 clean_data <- cbind(raw_data, as.data.frame(status))
 
-write.csv(clean_data, "OldRateStatus.csv", row.names = FALSE, fileEncoding = "UTF-8")
+write.csv(clean_data, "data/OldRateStatus.csv", row.names = FALSE, fileEncoding = "UTF-8")
